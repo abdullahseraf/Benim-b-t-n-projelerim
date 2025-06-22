@@ -1,0 +1,54 @@
+.logo{
+    font-size: 2rem;
+    font-weight: bold;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
+    padding-bottom: 5px;
+}
+
+.logo:hover{
+    color: #61dafb;
+    text-shadow: 0 0 20px rgba(97, 218, 251, 0.6);
+    cursor: pointer;
+    transition: 0.5s;
+}
+
+.logo::first-letter{
+    color: #61dafb;
+    font-size: 2.5rem;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.header{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    color: white;
+}
+
+.navbar{
+    display: flex;
+    gap: 20px;
+}
+
+.navList{
+    list-style: none;
+    display: flex;
+    gap: 20px;
+
+}
+
+.navItem{
+    color: #fff;
+    cursor: pointer;
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.6);
+    font-size: 1.3rem;
+    font-weight: 500;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    text-decoration: none;
+}
+
+.navItem:hover{
+    color: #61dafb;
+    transition: 0.5s;
+    text-shadow: 0 0 5px rgba(97, 218, 251, 0.6);
+}
