@@ -1,3 +1,4 @@
+
 /*=============== SHOW SIDEBAR ===============*/
 const showSidebar = (toggleId, sidebarId, headerId, mainId) =>{
     const toggle = document.getElementById(toggleId),
@@ -127,3 +128,159 @@ function showMessage(text, type) {
     messageBox.className = type;
     messageBox.style.display = "block";
 };
+
+
+// Mesaj kutusunu 3 saniye sonra gizle
+// Loading Screen
+window.addEventListener('load', function() {
+    const loadingScreen = document.getElementById('loadingScreen');
+    setTimeout(() => {
+        loadingScreen.classList.add('hidden');
+        setTimeout(() => {
+            loadingScreen.style.display = 'none';
+        }, 800);
+    }, 3000);
+});
+
+// Scroll Animations
+function initScrollAnimations() {
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -100px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('revealed');
+            }
+        });
+    }, observerOptions);
+
+    // Add scroll reveal classes to elements
+    document.querySelectorAll('.Skills, .cards, .section__projects, .contact__us').forEach(el => {
+        el.classList.add('scroll-reveal');
+        observer.observe(el);
+    });
+
+    document.querySelectorAll('.hi__am').forEach(el => {
+        el.classList.add('slide-in-left');
+        observer.observe(el);
+    });
+
+    document.querySelectorAll('.home__img').forEach(el => {
+        el.classList.add('slide-in-right');
+        observer.observe(el);
+    });
+
+    document.querySelectorAll('.skill-box').forEach(el => {
+        el.classList.add('fade-in');
+        observer.observe(el);
+    });
+
+    document.querySelectorAll('.card__projects, .servises__card').forEach(el => {
+        el.classList.add('scale-in');
+        observer.observe(el);
+    });
+}
+
+// Scroll Progress Indicator
+function initScrollProgress() {
+    const progressBar = document.createElement('div');
+    progressBar.className = 'scroll-indicator';
+    progressBar.innerHTML = '<div class="scroll-progress"></div>';
+    document.body.appendChild(progressBar);
+
+    const progress = progressBar.querySelector('.scroll-progress');
+
+    window.addEventListener('scroll', () => {
+        const scrollTop = window.pageYOffset;
+        const docHeight = document.body.offsetHeight - window.innerHeight;
+        const scrollPercent = (scrollTop / docHeight) * 100;
+        progress.style.width = scrollPercent + '%';
+    });
+}
+
+// Cursor Trail Effect
+function initCursorTrail() {
+    const trails = [];
+    const trailCount = 5;
+
+    for (let i = 0; i < trailCount; i++) {
+        const trail = document.createElement('div');
+        trail.className = 'cursor-trail';
+        document.body.appendChild(trail);
+        trails.push(trail);
+    }
+
+    let mouseX = 0, mouseY = 0;
+
+    document.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+    });
+
+    function animateTrails() {
+        let x = mouseX, y = mouseY;
+
+        trails.forEach((trail, index) => {
+            trail.style.left = x - 3 + 'px';
+            trail.style.top = y - 3 + 'px';
+            trail.style.opacity = (trailCount - index) / trailCount;
+
+            const nextTrail = trails[index + 1] || trails[0];
+            x += (parseFloat(nextTrail.style.left) || x) * 0.3;
+            y += (parseFloat(nextTrail.style.top) || y) * 0.3;
+        });
+
+        requestAnimationFrame(animateTrails);
+    }
+
+    animateTrails();
+}
+
+// Parallax Effect
+function initParallax() {
+    window.addEventListener('scroll', () => {
+        const scrolled = window.pageYOffset;
+        const parallaxElements = document.querySelectorAll('.home__img, .contact__img');
+        
+        parallaxElements.forEach(element => {
+            const speed = 0.5;
+            element.style.transform = `translateY(${scrolled * speed}px)`;
+        });
+    });
+}
+
+// Enhanced Hover Effects
+function initEnhancedHovers() {
+    document.querySelectorAll('.card__projects').forEach(card => {
+        card.classList.add('glow-effect');
+    });
+
+    document.querySelectorAll('.skills__button, .button__projects').forEach(btn => {
+        btn.classList.add('enhanced-button');
+    });
+
+    document.querySelectorAll('.home__img').forEach(img => {
+        img.classList.add('floating');
+    });
+}
+
+// Typewriter Effect for Title
+function initTypewriter() {
+    const title = document.querySelector('.hi__am h1');
+    if (title) {
+        title.classList.add('typewriter');
+    }
+}
+
+// Initialize all effects
+document.addEventListener('DOMContentLoaded', () => {
+    initScrollAnimations();
+    initScrollProgress();
+    initCursorTrail();
+    initParallax();
+    initEnhancedHovers();
+    initTypewriter();
+});
